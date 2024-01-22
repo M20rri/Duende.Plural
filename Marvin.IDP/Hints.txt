@@ -1,0 +1,11 @@
+﻿* To Create Duende Identity Server templates on List Help
+- dotnet new --install Duende.IdentityServer.Templates
+
+* Create Empty Duende Template
+- dotnet new isempty -n <ProjectName> -- Marvin.IDP
+
+* Apply UI to empty template
+- dotnet new isui
+
+* Apply Authentication OpenId to clients
+- Microsoft.AspNetCore.Authentication.OpenIdConnect

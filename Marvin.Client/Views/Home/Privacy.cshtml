@@ -1,0 +1,17 @@
+﻿@model IEnumerable<WeatherForecastDto>
+
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+@foreach (var item in Model)
+{
+    <h1>@item.TemperatureF</h1>
+    <h2>@item.TemperatureC</h2>
+    <h3>@item.Summary</h3>
+    <h4>@item.Date</h4>
+    <hr/>
+}
