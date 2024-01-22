@@ -23,6 +23,12 @@ namespace Marvin.API.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            var currentUserId = User.Claims.FirstOrDefault(a => a.Type == "sub")?.Value;
+            if (currentUserId == null)
+            {
+                throw new Exception("user identifier is missing from token");
+            }
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

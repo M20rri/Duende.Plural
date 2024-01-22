@@ -36,7 +36,7 @@ public static class Config
     public static IEnumerable<ApiResource> ApiResources =>
         new ApiResource[]
             {
-                new ApiResource("MarvinApi" , "Marvin EndPoint")
+                new ApiResource("MarvinApi" , "Marvin EndPoint" , new[]{"role"})
                 {
                     Scopes = { "MarvinApi.fullAccess" }
                 }

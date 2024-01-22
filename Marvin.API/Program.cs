@@ -18,7 +18,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>
         {
             options.Authority = "https://localhost:5001";
-            options.Audience = "MarvinApi";
+            options.Audience = "MarvinApi"; // ApiResource
             options.TokenValidationParameters = new()
             {
                 NameClaimType = "given_name",
