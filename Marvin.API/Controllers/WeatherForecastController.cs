@@ -21,6 +21,7 @@ namespace Marvin.API.Controllers
         }
 
         [Authorize(Policy = "AbleToFetch")]
+        [Authorize(Policy = "AbleToRead")]
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {

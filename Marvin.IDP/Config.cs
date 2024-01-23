@@ -17,7 +17,7 @@ public static class Config
     /// </summary>
     public static IEnumerable<IdentityResource> IdentityResources =>
         new IdentityResource[]
-        {       
+        {
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
             new IdentityResources.Phone(),
@@ -29,7 +29,7 @@ public static class Config
             displayName: "your family details")
         };
 
-    
+
     /// <summary>
     /// Mapped to Api : client applications can access the apis
     /// these client applications are configured to clients (Read , Write , Update , Delete)
@@ -38,15 +38,22 @@ public static class Config
     public static IEnumerable<ApiScope> ApiScopes =>
         new ApiScope[]
             {
-                new ApiScope("MarvinApi.fullAccess")
+                new ApiScope("Custom.MarvinApi.read"),
+                new ApiScope("Custom.MarvinApi.write"),
+                new ApiScope("Custom.MarvinApi.fullAccess")
             };
 
     public static IEnumerable<ApiResource> ApiResources =>
         new ApiResource[]
             {
-                new ApiResource("MarvinApi" , "Marvin EndPoint" , new[]{"role" , "country"})
+                new ApiResource("MarvinApi" , "Marvin EndPoint" , new[]{"role" , "country" , "phone_number" , "isMarried"})
                 {
-                    Scopes = { "MarvinApi.fullAccess" }
+                    Scopes =
+                    {
+                        "Custom.MarvinApi.fullAccess"
+                       ,"Custom.MarvinApi.read"
+                       ,"Custom.MarvinApi.write"
+                    }
                 }
             };
 
@@ -80,7 +87,8 @@ public static class Config
                        "role",
                        "custom.country",
                        "custom.Personality",
-                       "MarvinApi.fullAccess" // for Endpoint Scope
+                       "Custom.MarvinApi.read"
+                       //"Custom.MarvinApi.fullAccess" // for Endpoint Scope
                     },
                     ClientSecrets =
                     {

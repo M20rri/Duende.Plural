@@ -1,8 +1,5 @@
 using Marvin.Authorization;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.Extensions.DependencyInjection;
 using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +29,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization(o =>
 {
     o.AddPolicy("AbleToFetch", AuthorizationPolicies.CanGetWathers());
+    o.AddPolicy("AbleToRead", policy =>
+    {
+        policy.RequireClaim("scope", "Custom.MarvinApi.read");
+    });
 });
 
 

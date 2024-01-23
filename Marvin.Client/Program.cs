@@ -70,8 +70,8 @@ builder.Services.AddAuthentication(options =>
     options.ClaimActions.DeleteClaim("ver");
     options.ClaimActions.DeleteClaim("amr");
 
-    // Add ultra scope
-    options.Scope.Add("MarvinApi.fullAccess");
+    // Add ultra scope all existing in client AllowedScopes
+    options.Scope.Add("Custom.MarvinApi.read");
     options.Scope.Add("role");
     options.Scope.Add("profile");
     options.Scope.Add("phone");
