@@ -8,7 +8,7 @@ namespace Marvin.Authorization
         {
             return new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
-                .RequireClaim("country", "EG")
+                .RequireClaim("country", "BR")
                 .RequireRole("Admin")
                 .Build();
         }
