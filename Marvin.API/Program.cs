@@ -1,3 +1,4 @@
+using Marvin.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -26,6 +27,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 ValidTypes = new[] { "at+jwt" }
             };
         });
+
+
+builder.Services.AddAuthorization(o =>
+{
+    o.AddPolicy("AbleToFetch", AuthorizationPolicies.CanGetWathers());
+});
+
 
 var app = builder.Build();
 

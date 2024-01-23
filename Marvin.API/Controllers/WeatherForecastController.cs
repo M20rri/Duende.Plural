@@ -20,9 +20,12 @@ namespace Marvin.API.Controllers
             _logger = logger;
         }
 
+        [Authorize(Policy = "AbleToFetch")]
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            var claims = User.Claims;
+
             var currentUserId = User.Claims.FirstOrDefault(a => a.Type == "sub")?.Value;
             if (currentUserId == null)
             {

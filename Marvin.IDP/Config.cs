@@ -5,6 +5,7 @@ namespace Marvin.IDP;
 
 public static class Config
 {
+
     /// <summary>
     ///  * Set of claims related to User
     ///  openid (required scope for OIDC) => Claims: sub(user identifier)
@@ -16,13 +17,19 @@ public static class Config
     /// </summary>
     public static IEnumerable<IdentityResource> IdentityResources =>
         new IdentityResource[]
-        {
+        {       
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
-            new IdentityResource("idRoles" , "your role(s)",new[]{"role"}), // custom idRoles you can change name it's just alias
-            new IdentityResource("idCountry" , "your country",new[]{"country"})
+            new IdentityResources.Phone(),
+            new IdentityResource("role" , "your role(s)",new[]{"role"}),
+            new IdentityResource("custom.country" , "current country",new[]{"country"}),
+            new IdentityResource(
+            name: "custom.Personality",
+            userClaims: new[] { "hasChildren" , "isMarried" , "religion"},
+            displayName: "your family details")
         };
 
+    
     /// <summary>
     /// Mapped to Api : client applications can access the apis
     /// these client applications are configured to clients (Read , Write , Update , Delete)
@@ -37,7 +44,7 @@ public static class Config
     public static IEnumerable<ApiResource> ApiResources =>
         new ApiResource[]
             {
-                new ApiResource("MarvinApi" , "Marvin EndPoint" , new[]{"role"})
+                new ApiResource("MarvinApi" , "Marvin EndPoint" , new[]{"role" , "country"})
                 {
                     Scopes = { "MarvinApi.fullAccess" }
                 }
@@ -69,8 +76,10 @@ public static class Config
                     {
                        IdentityServerConstants.StandardScopes.OpenId,
                        IdentityServerConstants.StandardScopes.Profile,
-                       "idRoles",
-                       "idCountry",
+                       IdentityServerConstants.StandardScopes.Phone,
+                       "role",
+                       "custom.country",
+                       "custom.Personality",
                        "MarvinApi.fullAccess" // for Endpoint Scope
                     },
                     ClientSecrets =

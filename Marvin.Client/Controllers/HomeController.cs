@@ -18,7 +18,7 @@ namespace Marvin.Client.Controllers
             _logger = logger;
             _httpClientFactory = httpClientFactory;
         }
-
+    
         public async Task<IActionResult> Index()
         {
             var result = await LogIdentityInformations();
@@ -26,7 +26,7 @@ namespace Marvin.Client.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "AbleToFetch")]
         public async Task<IActionResult> Privacy()
         {
             var httpClient = _httpClientFactory.CreateClient("APIClient");
@@ -52,18 +52,20 @@ namespace Marvin.Client.Controllers
             var identityToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
             var accessToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
 
-            var userClaimsStringBuilder = new StringBuilder();
+            var userClaimSB = new StringBuilder();
             foreach (var claim in User.Claims)
             {
                 _homes.Add(claim.Type, claim.Value);
-                userClaimsStringBuilder.AppendLine(
+                userClaimSB.AppendLine(
                   $"Claim type: {claim.Type} - Claim value: {claim.Value}");
             }
 
             _logger.LogInformation($"Identity token & user claims: " +
-               $"\n{identityToken} \n{userClaimsStringBuilder}");
+               $"\n{identityToken} \n{userClaimSB}");
 
             _logger.LogInformation($"Access Token: {accessToken}");
+
+            _logger.LogInformation($"Identity Token: {identityToken}");
 
             return _homes;
         }

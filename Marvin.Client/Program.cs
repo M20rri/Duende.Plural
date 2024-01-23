@@ -1,6 +1,7 @@
 using Marvin.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Net.Http.Headers;
 using System.IdentityModel.Tokens.Jwt;
@@ -45,26 +46,77 @@ builder.Services.AddAuthentication(options =>
     // of IdentityServer.
     // To change, set SignedOutCallbackPath
     // eg: options.SignedOutCallbackPath = new PathString("pathaftersignout");
+
     options.SaveTokens = true;
     options.GetClaimsFromUserInfoEndpoint = true;
 
     // for remove un-needed claims
-    options.ClaimActions.Remove("aud");
-    options.ClaimActions.DeleteClaim("sid");
+
+    options.ClaimActions.DeleteClaim("nonce");
+    options.ClaimActions.DeleteClaim("aud");
+    options.ClaimActions.DeleteClaim("azp");
+    options.ClaimActions.DeleteClaim("acr");
+    options.ClaimActions.DeleteClaim("amr");
+    options.ClaimActions.DeleteClaim("iss");
+    options.ClaimActions.DeleteClaim("iat");
+    options.ClaimActions.DeleteClaim("nbf");
+    options.ClaimActions.DeleteClaim("exp");
     options.ClaimActions.DeleteClaim("idp");
+    options.ClaimActions.DeleteClaim("at_hash");
+    options.ClaimActions.DeleteClaim("c_hash");
     options.ClaimActions.DeleteClaim("auth_time");
-    options.ClaimActions.DeleteClaim("identityprovider");
+    options.ClaimActions.DeleteClaim("ipaddr");
+    options.ClaimActions.DeleteClaim("platf");
+    options.ClaimActions.DeleteClaim("ver");
+    options.ClaimActions.DeleteClaim("amr");
 
     // Add ultra scope
     options.Scope.Add("MarvinApi.fullAccess");
-    options.Scope.Add("idRoles");
-    options.Scope.Add("idCountry");
-    options.ClaimActions.MapJsonKey("role", "role");
+    options.Scope.Add("role");
+    options.Scope.Add("profile");
+    options.Scope.Add("phone");
+    options.Scope.Add("custom.Personality");
+    options.Scope.Add("custom.country");
+
+    #region MapJsonKey
+
+    /// <summary>
+    /// options.ClaimActions.MapJsonKey applied only for UserClaims .
+    /// ex : new IdentityResource("custom.country" , "current country",new[]{"country"})
+    /// we will appy it on the UserClaims is "country"
+    /// </summary>
+
+    #region included in custom.country 
     options.ClaimActions.MapJsonKey("country", "country");
+    #endregion
+
+    #region included in profile
+    options.ClaimActions.MapJsonKey("gender", "gender");
+    options.ClaimActions.MapJsonKey("locale", "locale");
+    options.ClaimActions.MapJsonKey("preferred_username", "preferred_username");
+    options.ClaimActions.MapJsonKey("website", "website");
+    #endregion
+
+    #region included in phone
+    options.ClaimActions.MapJsonKey("phone_number", "phone_number");
+    #endregion
+
+    #region included in role
+    options.ClaimActions.MapJsonKey("role", "role");
+    #endregion
+
+    #region included in custom.Personality
+    options.ClaimActions.MapJsonKey("hasChildren", "hasChildren");
+    options.ClaimActions.MapJsonKey("isMarried", "isMarried");
+    options.ClaimActions.MapJsonKey("religion", "religion");
+    #endregion
+
+
+    #endregion
 
     options.TokenValidationParameters = new() // to apply claims on token
     {
-        NameClaimType = "given_name",
+        NameClaimType = "preferred_username",
         RoleClaimType = "role",
     };
 });
