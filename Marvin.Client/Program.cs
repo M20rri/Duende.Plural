@@ -1,3 +1,4 @@
+using Marvin.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -57,13 +58,20 @@ builder.Services.AddAuthentication(options =>
     // Add ultra scope
     options.Scope.Add("MarvinApi.fullAccess");
     options.Scope.Add("idRoles");
+    options.Scope.Add("idCountry");
     options.ClaimActions.MapJsonKey("role", "role");
+    options.ClaimActions.MapJsonKey("country", "country");
 
     options.TokenValidationParameters = new() // to apply claims on token
     {
         NameClaimType = "given_name",
         RoleClaimType = "role",
     };
+});
+
+builder.Services.AddAuthorization(o =>
+{
+    o.AddPolicy("AbleToFetch", AuthorizationPolicies.CanGetWathers());
 });
 
 var app = builder.Build();

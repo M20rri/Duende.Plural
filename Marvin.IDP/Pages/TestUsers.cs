@@ -20,6 +20,7 @@ public class TestUsers
                     Claims = new List<Claim>
                     {
                         new Claim("role", "Basic"),
+                        new Claim("country", "USA"),
                         new Claim(JwtClaimTypes.GivenName, "David"),
                         new Claim(JwtClaimTypes.FamilyName, "Flagg")
                     }
@@ -32,8 +33,22 @@ public class TestUsers
                     Claims = new List<Claim>
                     {
                         new Claim("role", "Admin"),
+                        new Claim("country", "BR"),
                         new Claim(JwtClaimTypes.GivenName, "Emma"),
                         new Claim(JwtClaimTypes.FamilyName, "Flagg")
+                    }
+                },
+                new TestUser
+                {
+                    SubjectId = "1086ad19-81e6-441e-bad2-08dc11ba36d4",
+                    Username = "M2ri",
+                    Password = "P@$$w0rd",
+                    Claims = new List<Claim>
+                    {
+                        new Claim("role", "Admin"),
+                        new Claim("country", "EG"),
+                        new Claim(JwtClaimTypes.GivenName, "Mahmoud"),
+                        new Claim(JwtClaimTypes.FamilyName, "El Torri")
                     }
                 }
             };

@@ -19,7 +19,8 @@ public static class Config
         {
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
-            new IdentityResource("idRoles" , "your role(s)",new[]{"role"}) // custom idRoles you can change name it's just alias
+            new IdentityResource("idRoles" , "your role(s)",new[]{"role"}), // custom idRoles you can change name it's just alias
+            new IdentityResource("idCountry" , "your country",new[]{"country"})
         };
 
     /// <summary>
@@ -69,6 +70,7 @@ public static class Config
                        IdentityServerConstants.StandardScopes.OpenId,
                        IdentityServerConstants.StandardScopes.Profile,
                        "idRoles",
+                       "idCountry",
                        "MarvinApi.fullAccess" // for Endpoint Scope
                     },
                     ClientSecrets =
