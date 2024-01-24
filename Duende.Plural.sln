@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marvin.API", "Marvin.API\Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marvin.Client", "Marvin.Client\Marvin.Client.csproj", "{140A6333-5941-4CE1-B4BF-1C519B5AFC0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marvin.Authorization", "Marvin.Authorization\Marvin.Authorization.csproj", "{9E0AA125-F89C-4408-83A4-009709B7C81A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marvin.Authorization", "Marvin.Authorization\Marvin.Authorization.csproj", "{9E0AA125-F89C-4408-83A4-009709B7C81A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Duende", "Duende", "{BA1AC66F-DA3F-4FDE-A3C3-791179BB3995}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{14499996-94DC-460A-BB9F-57E79353B516} = {BA1AC66F-DA3F-4FDE-A3C3-791179BB3995}
+		{85A1D810-9EB0-4D0B-8374-DD9B7BFE4A7E} = {BA1AC66F-DA3F-4FDE-A3C3-791179BB3995}
+		{140A6333-5941-4CE1-B4BF-1C519B5AFC0D} = {BA1AC66F-DA3F-4FDE-A3C3-791179BB3995}
+		{9E0AA125-F89C-4408-83A4-009709B7C81A} = {BA1AC66F-DA3F-4FDE-A3C3-791179BB3995}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFB3A1A6-3487-44CF-BFA0-A2E9F3BC93D5}
