@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
-namespace ImageGallery.Client.Controllers
+namespace Marvin.Client.Controllers
 {
     public class AuthenticationController : Controller
     {
