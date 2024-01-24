@@ -51,6 +51,7 @@ namespace Marvin.Client.Controllers
         {
             var identityToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
             var accessToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
+            var refreshToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
 
             var userClaimSB = new StringBuilder();
             foreach (var claim in User.Claims)
@@ -66,6 +67,8 @@ namespace Marvin.Client.Controllers
             _logger.LogInformation($"Access Token: {accessToken}");
 
             _logger.LogInformation($"Identity Token: {identityToken}");
+
+            _logger.LogInformation($"Refresh Token: {refreshToken}");
 
             return _homes;
         }

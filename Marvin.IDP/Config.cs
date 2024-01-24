@@ -53,7 +53,8 @@ public static class Config
                         "Custom.MarvinApi.fullAccess"
                        ,"Custom.MarvinApi.read"
                        ,"Custom.MarvinApi.write"
-                    }
+                    },
+                    ApiSecrets = { new Secret("apisecret".Sha256())} // for working with Reference Token
                 }
             };
 
@@ -69,6 +70,10 @@ public static class Config
                     ClientId = "Marvin-Client",
                     ClientName = "Marvin MVC Project",
                     AllowedGrantTypes = GrantTypes.Code,
+                    AllowOfflineAccess = true,
+                    UpdateAccessTokenClaimsOnRefresh = true,
+                    AccessTokenType = AccessTokenType.Reference,
+                    AccessTokenLifetime = 3600, // 1 hour
                     RedirectUris =
                     {
                         // This is Client Url

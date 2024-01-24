@@ -72,6 +72,7 @@ builder.Services.AddAuthentication(options =>
 
     // Add ultra scope all existing in client AllowedScopes
     options.Scope.Add("Custom.MarvinApi.read");
+    options.Scope.Add("offline_access");
     options.Scope.Add("role");
     options.Scope.Add("profile");
     options.Scope.Add("phone");

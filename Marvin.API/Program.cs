@@ -13,16 +13,24 @@ builder.Services.AddSwaggerGen();
 
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(options =>
+        //.AddJwtBearer(options =>
+        //{
+        //    options.Authority = "https://localhost:5001";
+        //    options.Audience = "MarvinApi"; // ApiResource
+        //    options.TokenValidationParameters = new()
+        //    {
+        //        NameClaimType = "given_name",
+        //        RoleClaimType = "role",
+        //        ValidTypes = new[] { "at+jwt" }
+        //    };
+        //});
+        .AddOAuth2Introspection(options =>
         {
             options.Authority = "https://localhost:5001";
-            options.Audience = "MarvinApi"; // ApiResource
-            options.TokenValidationParameters = new()
-            {
-                NameClaimType = "given_name",
-                RoleClaimType = "role",
-                ValidTypes = new[] { "at+jwt" }
-            };
+            options.ClientId = "MarvinApi"; // ApiResource
+            options.ClientSecret = "apisecret";
+            options.NameClaimType = "given_name";
+            options.RoleClaimType = "role";
         });
 
 
