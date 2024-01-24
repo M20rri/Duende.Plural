@@ -21,6 +21,7 @@ if (seed)
     SeedData.EnsureSeedData(defaultConnString);
 }
 
+builder.Services.AddAuthorization();
 builder.Services.AddDbContext<CoffieShopIdentityDbContext>(options =>
     options.UseSqlServer(defaultConnString,
         b => b.MigrationsAssembly(assembly)));
@@ -44,6 +45,8 @@ builder.Services.AddIdentityServer()
 
 
 var app = builder.Build();
+app.UseAuthentication();
+app.UseRouting();
 app.UseIdentityServer();
 app.UseAuthorization();
 app.MapGet("/", () => "Hello World!");

@@ -6,8 +6,8 @@ namespace CoffieShop.Identity.Configs
     public class Config
     {
         public static IEnumerable<IdentityResource> IdentityResources =>
-            new[]
-            {
+          new[]
+          {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
                 new IdentityResource
@@ -16,10 +16,10 @@ namespace CoffieShop.Identity.Configs
                     UserClaims = new List<string> { "role" }
                 },
                 new IdentityResource("custom.country" , "current country",new[]{"country"})
-            };
+          };
 
         public static IEnumerable<ApiScope> ApiScopes =>
-        new ApiScope[]
+                    new ApiScope[]
         {
                 new ApiScope("ApiScopes.CoffeeAPI.read"),
                 new ApiScope("ApiScopes.CoffeeAPI.write"),
@@ -27,9 +27,9 @@ namespace CoffieShop.Identity.Configs
         };
 
         public static IEnumerable<ApiResource> ApiResources =>
-        new ApiResource[]
-        {
-                new ApiResource("ApiResources.CoffeeAPI" , "ApiResources CoffeeAPI EndPoint" , new[]{"role" , "country"})
+            new[]
+            {
+                new ApiResource("CoffeeAPI")
                 {
                     Scopes =
                     {
@@ -37,9 +37,11 @@ namespace CoffieShop.Identity.Configs
                        ,"ApiScopes.CoffeeAPI.read"
                        ,"ApiScopes.CoffeeAPI.write"
                     },
-                    ApiSecrets = { new Secret("c6Zyz7oDyZyZ22q3U0l8SWHMzCMF".Sha256())} // for working with Reference Token
+                    ApiSecrets = { new Secret("c6Zyz7oDyZyZ22q3U0l8SWHMzCMF".Sha256())},
+                    UserClaims = new List<string> { "role" , "country" }
                 }
-        };
+            };
+
 
         public static IEnumerable<Client> Clients =>
             new[]
@@ -61,7 +63,7 @@ namespace CoffieShop.Identity.Configs
                 // interactive client using code flow + pkce
                 new Client
                 {
-                    ClientId = "coffie.api",
+                     ClientId = "coffie.api",
                     ClientName = "Coffie Endpoints",
                     ClientSecrets = { new Secret("c6Zyz7oDyZyZ22q3U0l8SWHMzCMF".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ClientCredentials,

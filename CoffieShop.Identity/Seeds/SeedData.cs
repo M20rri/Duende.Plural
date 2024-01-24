@@ -2,6 +2,7 @@
 using CoffieShop.Identity.Context;
 using CoffieShop.Identity.Identity;
 using IdentityModel;
+using System.Linq;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using IdentityServer4.EntityFramework.Storage;
@@ -52,9 +53,9 @@ namespace CoffieShop.Identity.Seeds
             using var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
             scope.ServiceProvider.GetService<PersistedGrantDbContext>().Database.Migrate();
 
+
             var context = scope.ServiceProvider.GetService<ConfigurationDbContext>();
             context.Database.Migrate();
-
             EnsureSeedData(context);
 
             var ctx = scope.ServiceProvider.GetService<CoffieShopIdentityDbContext>();
@@ -64,30 +65,32 @@ namespace CoffieShop.Identity.Seeds
 
         private static void EnsureUsers(IServiceScope scope)
         {
-            var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
-            var _user = userMgr.FindByNameAsync("M2ri").Result;
-            if (_user == null)
+            try
             {
-                _user = new ApplicationUser
-                {
-                    UserName = "M2ri",
-                    Email = "m.eltorri@gmail.com",
-                    EmailConfirmed = true,
-                    Firstname = "Mahmoud",
-                    LastName="El Torri"
-                };
-                var result = userMgr.CreateAsync(_user, "Pa$$w0rd").Result;
-                if (!result.Succeeded)
-                {
-                    throw new Exception(result.Errors.First().Description);
-                }
+                var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-                result =
-                    userMgr.AddClaimsAsync(
-                        _user,
-                        new Claim[]
-                        {
+                var _user = userMgr.FindByNameAsync("M2ri").Result;
+                if (_user == null)
+                {
+                    _user = new ApplicationUser
+                    {
+                        UserName = "M2ri",
+                        Email = "m.eltorri@gmail.com",
+                        EmailConfirmed = true,
+                        Firstname = "Mahmoud",
+                        LastName = "El Torri"
+                    };
+                    var result = userMgr.CreateAsync(_user, "Pa$$w0rd").Result;
+                    if (!result.Succeeded)
+                    {
+                        throw new Exception(result.Errors.First().Description);
+                    }
+
+                    result =
+                        userMgr.AddClaimsAsync(
+                            _user,
+                            new Claim[]
+                            {
                                  new Claim(JwtClaimTypes.Name, "Mahmoud El Torri"),
                                 new Claim(JwtClaimTypes.PreferredUserName, "MTorri"),
                                 new Claim(JwtClaimTypes.FamilyName, "El Torri"),
@@ -99,12 +102,18 @@ namespace CoffieShop.Identity.Seeds
                                 new Claim(JwtClaimTypes.WebSite, "www.M2ri.com"),
                                 new Claim("role", "Admin"),
                                 new Claim("country", "USA"),
-                        }
-                    ).Result;
-                if (!result.Succeeded)
-                {
-                    throw new Exception(result.Errors.First().Description);
+                            }
+                        ).Result;
+                    if (!result.Succeeded)
+                    {
+                        throw new Exception(result.Errors.First().Description);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
 
@@ -117,7 +126,8 @@ namespace CoffieShop.Identity.Seeds
                 {
                     try
                     {
-                        context.Clients.Add(client.ToEntity());
+                        var _client = client.ToEntity();
+                        context.Clients.Add(_client);
                     }
                     catch (Exception ex)
                     {

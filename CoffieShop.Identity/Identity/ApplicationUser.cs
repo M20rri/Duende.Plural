@@ -6,5 +6,6 @@ namespace CoffieShop.Identity.Identity
     {
         public string Firstname { get; set; } = default!;
         public string LastName { get; set; } = default!;
+        public bool IsActive { get; set; }
     }
 }
