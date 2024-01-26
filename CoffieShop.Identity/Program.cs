@@ -1,6 +1,7 @@
 using CoffieShop.Identity.Context;
 using CoffieShop.Identity.Identity;
 using CoffieShop.Identity.Seeds;
+using CoffieShop.Identity.Validators;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +13,7 @@ if (seed)
 
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddControllers();
 var assembly = typeof(Program).Assembly.GetName().Name;
 var defaultConnString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -29,7 +30,14 @@ builder.Services.AddDbContext<CoffieShopIdentityDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<CoffieShopIdentityDbContext>();
 
-builder.Services.AddIdentityServer()
+builder.Services.AddIdentityServer(options =>
+{
+    options.Events.RaiseErrorEvents = true;
+    options.Events.RaiseInformationEvents = true;
+    options.Events.RaiseFailureEvents = true;
+    options.Events.RaiseSuccessEvents = true;
+    options.EmitStaticAudienceClaim = true;
+})
     .AddAspNetIdentity<ApplicationUser>()
     .AddConfigurationStore(options =>
     {
@@ -41,7 +49,8 @@ builder.Services.AddIdentityServer()
         options.ConfigureDbContext = b =>
         b.UseSqlServer(defaultConnString, opt => opt.MigrationsAssembly(assembly));
     })
-    .AddDeveloperSigningCredential();
+   .AddProfileService<ProfileService>()
+   .AddResourceOwnerValidator<CustomResourceOwnerPasswordValidator>();
 
 
 var app = builder.Build();
@@ -49,6 +58,6 @@ app.UseAuthentication();
 app.UseRouting();
 app.UseIdentityServer();
 app.UseAuthorization();
-app.MapGet("/", () => "Hello World!");
+app.MapControllers();
 
 app.Run();

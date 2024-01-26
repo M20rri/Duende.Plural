@@ -53,7 +53,7 @@ namespace CoffieShop.Identity.Configs
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     AllowOfflineAccess = true,
                     UpdateAccessTokenClaimsOnRefresh = true,
-                    AccessTokenType = AccessTokenType.Reference,
+                    //AccessTokenType = AccessTokenType.Reference,
                     AccessTokenLifetime = 3600, // 1 hour
                     RedirectUris =
                     {
