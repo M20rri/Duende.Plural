@@ -1,7 +1,11 @@
 using CoffieShop.API.Services;
 using CoffieShop.DataAccess.Context;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,13 +19,14 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CoffieShopDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(o =>
 {
-    o.Authority = "https://localhost:5443";
+    o.Authority = "https://localhost:5001";
     o.Audience = "CoffeeAPI";
     o.TokenValidationParameters = new()
     {
@@ -30,6 +35,9 @@ builder.Services.AddAuthentication(options =>
         ValidTypes = new[] { "at+jwt" }
     };
 });
+
+
+
 
 builder.Services.AddAuthorization();
 
