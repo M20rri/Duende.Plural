@@ -1,3 +1,4 @@
+using CoffieShop.Identity.Configs;
 using CoffieShop.Identity.Context;
 using CoffieShop.Identity.Identity;
 using CoffieShop.Identity.Seeds;
@@ -28,29 +29,37 @@ builder.Services.AddDbContext<CoffieShopIdentityDbContext>(options =>
         b => b.MigrationsAssembly(assembly)));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<CoffieShopIdentityDbContext>();
+    .AddEntityFrameworkStores<CoffieShopIdentityDbContext>()
+    .AddDefaultTokenProviders();
+
+//builder.Services.AddIdentityServer(options =>
+//{
+//    options.EmitStaticAudienceClaim = true;
+//})
+//    .AddAspNetIdentity<ApplicationUser>()
+//    .AddConfigurationStore(options =>
+//    {
+//        options.ConfigureDbContext = b =>
+//        b.UseSqlServer(defaultConnString, opt => opt.MigrationsAssembly(assembly));
+//    })
+//    .AddOperationalStore(options =>
+//    {
+//        options.ConfigureDbContext = b =>
+//        b.UseSqlServer(defaultConnString, opt => opt.MigrationsAssembly(assembly));
+//    });
+//.AddProfileService<ProfileService>()
+//.AddResourceOwnerValidator<CustomResourceOwnerPasswordValidator>();
 
 builder.Services.AddIdentityServer(options =>
 {
-    options.Events.RaiseErrorEvents = true;
-    options.Events.RaiseInformationEvents = true;
-    options.Events.RaiseFailureEvents = true;
-    options.Events.RaiseSuccessEvents = true;
     options.EmitStaticAudienceClaim = true;
 })
-    .AddAspNetIdentity<ApplicationUser>()
-    .AddConfigurationStore(options =>
-    {
-        options.ConfigureDbContext = b =>
-        b.UseSqlServer(defaultConnString, opt => opt.MigrationsAssembly(assembly));
-    })
-    .AddOperationalStore(options =>
-    {
-        options.ConfigureDbContext = b =>
-        b.UseSqlServer(defaultConnString, opt => opt.MigrationsAssembly(assembly));
-    })
-   .AddProfileService<ProfileService>()
-   .AddResourceOwnerValidator<CustomResourceOwnerPasswordValidator>();
+    .AddInMemoryIdentityResources(Config.IdentityResources)
+    .AddInMemoryApiResources(Config.ApiResources)
+    .AddInMemoryApiScopes(Config.ApiScopes)
+    .AddInMemoryClients(Config.Clients)
+    .AddTestUsers(ConfigUser.Users)
+    .AddDeveloperSigningCredential();
 
 
 var app = builder.Build();
