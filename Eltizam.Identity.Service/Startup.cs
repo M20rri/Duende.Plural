@@ -1,8 +1,4 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
-
-
-using IdentityServer4;
+﻿using IdentityServer4;
 using Eltizam.Identity.Service.Data;
 using Eltizam.Identity.Service.Models;
 using Microsoft.AspNetCore.Builder;
@@ -34,7 +30,7 @@ namespace Eltizam.Identity.Service
         {
             services.AddControllersWithViews();
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
-            
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -71,7 +67,7 @@ namespace Eltizam.Identity.Service
                 .AddGoogle(options =>
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-                    
+
                     // register your IdentityServer with Google at https://console.developers.google.com
                     // enable the Google+ API
                     // set the redirect URI to https://localhost:5001/signin-google
@@ -87,7 +83,8 @@ namespace Eltizam.Identity.Service
                 app.UseDeveloperExceptionPage();
             }
 
-            InitializeDatabase(app);
+            SeedData.EnsureSeedConfig(app);
+            //InitializeDatabase(app);
 
             app.UseStaticFiles();
 
