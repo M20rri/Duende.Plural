@@ -91,7 +91,7 @@ namespace CoffieShop.Identity.Seeds
                             _user,
                             new Claim[]
                             {
-                                 new Claim(JwtClaimTypes.Name, "Mahmoud El Torri"),
+                                new Claim(JwtClaimTypes.Name, "Mahmoud El Torri"),
                                 new Claim(JwtClaimTypes.PreferredUserName, "MTorri"),
                                 new Claim(JwtClaimTypes.FamilyName, "El Torri"),
                                 new Claim(JwtClaimTypes.GivenName, "Mahmoud"),

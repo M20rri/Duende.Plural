@@ -15,11 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Duende", "Duende", "{BA1AC6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IDServer4", "IDServer4", "{ACB39602-C9ED-42AD-9E63-B7001FEB1D27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffieShop.API", "CoffieShop.API\CoffieShop.API.csproj", "{9DF62A7D-AA6C-4B15-ACFA-A35A387282AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffieShop.API", "CoffieShop.API\CoffieShop.API.csproj", "{9DF62A7D-AA6C-4B15-ACFA-A35A387282AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffieShop.DataAccess", "CoffieShop.DataAccess\CoffieShop.DataAccess.csproj", "{98AFB91D-BB85-4135-BA09-13DC2EEEB3B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffieShop.DataAccess", "CoffieShop.DataAccess\CoffieShop.DataAccess.csproj", "{98AFB91D-BB85-4135-BA09-13DC2EEEB3B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffieShop.Identity", "CoffieShop.Identity\CoffieShop.Identity.csproj", "{DA6A8B97-7BC0-48F4-9FA3-6ACF095D7383}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffieShop.Identity", "CoffieShop.Identity\CoffieShop.Identity.csproj", "{DA6A8B97-7BC0-48F4-9FA3-6ACF095D7383}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServerAspNetIdentity", "IdentityServerAspNetIdentity", "{4CB4C4D7-684D-4C98-922C-2079B27DDE44}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eltizam.Identity.Service", "Eltizam.Identity.Service\Eltizam.Identity.Service.csproj", "{B6617117-85B3-4BD7-8C1D-E62BF39F4126}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,10 @@ Global
 		{DA6A8B97-7BC0-48F4-9FA3-6ACF095D7383}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA6A8B97-7BC0-48F4-9FA3-6ACF095D7383}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA6A8B97-7BC0-48F4-9FA3-6ACF095D7383}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6617117-85B3-4BD7-8C1D-E62BF39F4126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6617117-85B3-4BD7-8C1D-E62BF39F4126}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6617117-85B3-4BD7-8C1D-E62BF39F4126}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6617117-85B3-4BD7-8C1D-E62BF39F4126}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +75,7 @@ Global
 		{9DF62A7D-AA6C-4B15-ACFA-A35A387282AB} = {ACB39602-C9ED-42AD-9E63-B7001FEB1D27}
 		{98AFB91D-BB85-4135-BA09-13DC2EEEB3B5} = {ACB39602-C9ED-42AD-9E63-B7001FEB1D27}
 		{DA6A8B97-7BC0-48F4-9FA3-6ACF095D7383} = {ACB39602-C9ED-42AD-9E63-B7001FEB1D27}
+		{B6617117-85B3-4BD7-8C1D-E62BF39F4126} = {4CB4C4D7-684D-4C98-922C-2079B27DDE44}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFB3A1A6-3487-44CF-BFA0-A2E9F3BC93D5}
