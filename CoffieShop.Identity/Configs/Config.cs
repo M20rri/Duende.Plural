@@ -46,29 +46,39 @@ namespace CoffieShop.Identity.Configs
         public static IEnumerable<Client> Clients =>
             new[]
             {
-                // m2m client credentials flow client
                 new Client
                 {
-                    ClientId = "coffie.mvc",
-                    ClientName = "Coffie MVC Client",
-                    AllowedGrantTypes = GrantTypes.Code,
-                    ClientSecrets = { new Secret("c6Zyz7oDyZyZ22q3U0l8SWHMzCMF".Sha256()) },
-                    AllowedScopes = { "openid", "profile", "ApiScopes.CoffeeAPI.read" },
-                    RedirectUris = { "https://localhost:5444/signin-oidc" },
-                    FrontChannelLogoutUri = "https://localhost:5444/signout-oidc",
-                    PostLogoutRedirectUris = { "https://localhost:5444/signout-callback-oidc" },
+                    ClientId = "coffie.Client",
+                    ClientName = "Coffie Client",
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     AllowOfflineAccess = true,
-
-                },
-                // interactive client using code flow + pkce
-                new Client
-                {
-                     ClientId = "coffie.api",
-                    ClientName = "Coffie Endpoints",
-                    ClientSecrets = { new Secret("c6Zyz7oDyZyZ22q3U0l8SWHMzCMF".Sha256()) },
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes = { "ApiScopes.CoffeeAPI.read", "ApiScopes.CoffeeAPI.write" }
-                },
+                    UpdateAccessTokenClaimsOnRefresh = true,
+                    AccessTokenType = AccessTokenType.Reference,
+                    AccessTokenLifetime = 3600, // 1 hour
+                    RedirectUris =
+                    {
+                        // This is Client Url
+                        "https://localhost:5444/signin-oidc"
+                    },
+                     PostLogoutRedirectUris =
+                    {
+                        // This is Client Url
+                        "https://localhost:5444/signout-callback-oidc"
+                    },
+                    AllowedScopes =
+                    {
+                       IdentityServerConstants.StandardScopes.OpenId,
+                       IdentityServerConstants.StandardScopes.Profile,
+                       IdentityServerConstants.StandardScopes.Phone,
+                       "role",
+                       "custom.country",
+                       "ApiScopes.CoffeeAPI.read"
+                    },
+                    ClientSecrets =
+                    {
+                        new Secret("c6Zyz7oDyZyZ22q3U0l8SWHMzCMF".Sha256())
+                    }
+                 }
             };
     }
 }
