@@ -21,6 +21,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServerAspNetIdentit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eltizam.Identity.Service", "Eltizam.Identity.Service\Eltizam.Identity.Service.csproj", "{B6617117-85B3-4BD7-8C1D-E62BF39F4126}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageBrocker", "MessageBrocker", "{0C780DC7-2D76-4550-9549-4DEAEEB7A9CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airlines.Api", "Airliines.Api\Airlines.Api.csproj", "{E9D89CCA-B1E0-4AA2-897E-A1369C62ABC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airlines.Reservation", "Airlines.Reservation\Airlines.Reservation.csproj", "{76552BBA-6F94-457E-8F74-37CD5D330FB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +61,14 @@ Global
 		{B6617117-85B3-4BD7-8C1D-E62BF39F4126}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6617117-85B3-4BD7-8C1D-E62BF39F4126}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6617117-85B3-4BD7-8C1D-E62BF39F4126}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9D89CCA-B1E0-4AA2-897E-A1369C62ABC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9D89CCA-B1E0-4AA2-897E-A1369C62ABC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9D89CCA-B1E0-4AA2-897E-A1369C62ABC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9D89CCA-B1E0-4AA2-897E-A1369C62ABC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76552BBA-6F94-457E-8F74-37CD5D330FB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76552BBA-6F94-457E-8F74-37CD5D330FB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76552BBA-6F94-457E-8F74-37CD5D330FB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76552BBA-6F94-457E-8F74-37CD5D330FB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +81,8 @@ Global
 		{9DF62A7D-AA6C-4B15-ACFA-A35A387282AB} = {4CB4C4D7-684D-4C98-922C-2079B27DDE44}
 		{98AFB91D-BB85-4135-BA09-13DC2EEEB3B5} = {4CB4C4D7-684D-4C98-922C-2079B27DDE44}
 		{B6617117-85B3-4BD7-8C1D-E62BF39F4126} = {4CB4C4D7-684D-4C98-922C-2079B27DDE44}
+		{E9D89CCA-B1E0-4AA2-897E-A1369C62ABC6} = {0C780DC7-2D76-4550-9549-4DEAEEB7A9CE}
+		{76552BBA-6F94-457E-8F74-37CD5D330FB3} = {0C780DC7-2D76-4550-9549-4DEAEEB7A9CE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFB3A1A6-3487-44CF-BFA0-A2E9F3BC93D5}
